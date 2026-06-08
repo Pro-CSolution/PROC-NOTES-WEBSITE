@@ -4,6 +4,7 @@ import AddClientModal from "./components/AddClientModal";
 import ClientCard from "./components/ClientCard";
 import Header from "./components/Header";
 import LoginScreen from "./components/LoginScreen";
+import { isAllowedEmail } from "./config/auth";
 import { isCloudConfigured, supabase } from "./lib/supabase";
 
 const STORAGE_KEY = "proc-client-work-tracker";
@@ -71,7 +72,12 @@ export default function App() {
     supabase.auth.getSession().then(({ data, error }) => {
       if (!isActive) return;
       if (error) setCloudError(error.message);
-      setSession(data.session);
+      if (data.session && !isAllowedEmail(data.session.user.email)) {
+        supabase.auth.signOut();
+        setSession(null);
+      } else {
+        setSession(data.session);
+      }
       setIsAuthReady(true);
     });
 
@@ -79,6 +85,12 @@ export default function App() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, nextSession) => {
       if (!isActive) return;
+      if (nextSession && !isAllowedEmail(nextSession.user.email)) {
+        supabase.auth.signOut();
+        setSession(null);
+        setIsAuthReady(true);
+        return;
+      }
       setSession(nextSession);
       setIsAuthReady(true);
       if (!nextSession) setIsCloudReady(false);

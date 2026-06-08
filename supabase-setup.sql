@@ -6,21 +6,45 @@ create table if not exists public.app_state (
 
 alter table public.app_state enable row level security;
 
+drop policy if exists "Authenticated users can read tracker data" on public.app_state;
+drop policy if exists "Authenticated users can create tracker data" on public.app_state;
+drop policy if exists "Authenticated users can update tracker data" on public.app_state;
+
 create policy "Authenticated users can read tracker data"
 on public.app_state
 for select
 to authenticated
-using (true);
+using (
+  lower(auth.jwt() ->> 'email') in (
+    'estebanc@procsolution.com',
+    'melissaa@procsolution.com'
+  )
+);
 
 create policy "Authenticated users can create tracker data"
 on public.app_state
 for insert
 to authenticated
-with check (true);
+with check (
+  lower(auth.jwt() ->> 'email') in (
+    'estebanc@procsolution.com',
+    'melissaa@procsolution.com'
+  )
+);
 
 create policy "Authenticated users can update tracker data"
 on public.app_state
 for update
 to authenticated
-using (true)
-with check (true);
+using (
+  lower(auth.jwt() ->> 'email') in (
+    'estebanc@procsolution.com',
+    'melissaa@procsolution.com'
+  )
+)
+with check (
+  lower(auth.jwt() ->> 'email') in (
+    'estebanc@procsolution.com',
+    'melissaa@procsolution.com'
+  )
+);

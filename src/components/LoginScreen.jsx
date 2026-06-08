@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { KeyRound, LogIn, Mail } from "lucide-react";
+import { isAllowedEmail } from "../config/auth";
 import { supabase } from "../lib/supabase";
-
-const ALLOWED_EMAILS = [
-  "estebanc@procsolution.com",
-  "melissaa@procsolution.com",
-];
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -17,7 +13,7 @@ export default function LoginScreen() {
     event.preventDefault();
     const normalizedEmail = email.trim().toLowerCase();
 
-    if (!ALLOWED_EMAILS.includes(normalizedEmail)) {
+    if (!isAllowedEmail(normalizedEmail)) {
       setError("This email is not authorized to access the tracker.");
       return;
     }
