@@ -17,9 +17,17 @@ VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_YOUR_KEY
 5. In Supabase Authentication URL Configuration:
    - Set the local redirect URL to `http://localhost:5175`
    - After publishing, add the production website URL.
-6. Keep Email authentication enabled. For a private tracker, invite approved users and disable open sign-ups.
+6. Keep Email authentication enabled.
+7. In **Authentication > Providers > Email**, turn off **Confirm email**.
+8. In **Authentication > Users**, create these users with the shared password:
+   - `estebanc@procsolution.com`
+   - `melissaa@procsolution.com`
+9. After creating both users, disable new user sign-ups.
 
-When Supabase variables are configured, users sign in by email magic link and all changes save automatically to the shared cloud database. Without those variables, the app falls back to browser localStorage.
+The login form only accepts the two configured Pro-C email addresses. Users sign
+in directly with their password, and all changes save automatically to the
+shared cloud database. Supabase stores the password securely; it is not included
+in the website source code.
 
 ## Local Development
 

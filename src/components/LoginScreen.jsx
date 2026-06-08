@@ -1,30 +1,37 @@
 import { useState } from "react";
-import { LogIn, Mail } from "lucide-react";
+import { KeyRound, LogIn, Mail } from "lucide-react";
 import { supabase } from "../lib/supabase";
+
+const ALLOWED_EMAILS = [
+  "estebanc@procsolution.com",
+  "melissaa@procsolution.com",
+];
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const normalizedEmail = email.trim().toLowerCase();
+
+    if (!ALLOWED_EMAILS.includes(normalizedEmail)) {
+      setError("This email is not authorized to access the tracker.");
+      return;
+    }
+
     setIsLoading(true);
-    setMessage("");
     setError("");
 
-    const { error: signInError } = await supabase.auth.signInWithOtp({
-      email: email.trim(),
-      options: {
-        emailRedirectTo: window.location.origin,
-      },
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email: normalizedEmail,
+      password,
     });
 
     if (signInError) {
-      setError(signInError.message);
-    } else {
-      setMessage("Check your email for the secure sign-in link.");
+      setError("The email or password is incorrect.");
     }
 
     setIsLoading(false);
@@ -48,7 +55,7 @@ export default function LoginScreen() {
           <div>
             <h1 className="text-xl font-black text-white">Sign in to Tracker</h1>
             <p className="mt-1 text-xs leading-5 text-slate-400">
-              Your clients, jobs, and notes will load and save automatically.
+              Authorized Pro-C accounts only. Your work saves automatically.
             </p>
           </div>
         </div>
@@ -69,7 +76,27 @@ export default function LoginScreen() {
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
-                placeholder="name@company.com"
+                placeholder="name@procsolution.com"
+                className="form-field pl-10"
+              />
+            </div>
+          </label>
+
+          <label className="block">
+            <span className="mb-2 block text-xs font-bold text-slate-200">
+              Password
+            </span>
+            <div className="relative">
+              <KeyRound
+                size={16}
+                className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"
+              />
+              <input
+                required
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder="Enter password"
                 className="form-field pl-10"
               />
             </div>
@@ -80,15 +107,10 @@ export default function LoginScreen() {
             disabled={isLoading}
             className="primary-button w-full rounded-xl px-5 py-3 text-sm font-bold disabled:cursor-wait disabled:opacity-60"
           >
-            {isLoading ? "Sending link..." : "Email Me a Sign-In Link"}
+            {isLoading ? "Signing in..." : "Sign In"}
           </button>
         </form>
 
-        {message && (
-          <p className="mt-4 rounded-xl border border-emerald-300/15 bg-emerald-400/5 px-4 py-3 text-xs leading-5 text-emerald-100">
-            {message}
-          </p>
-        )}
         {error && (
           <p className="mt-4 rounded-xl border border-rose-300/15 bg-rose-500/5 px-4 py-3 text-xs leading-5 text-rose-100">
             {error}
