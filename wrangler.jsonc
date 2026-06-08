@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "pronotes",
+  "name": "procnotes",
   "compatibility_date": "2026-06-08",
   "build": {
     "command": "npm run build"
