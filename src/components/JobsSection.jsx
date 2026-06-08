@@ -27,9 +27,9 @@ export default function JobsSection({
         <button
           type="button"
           onClick={() => setIsJobModalOpen(true)}
-          className="secondary-button flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-bold"
+          className="secondary-button flex items-center gap-1 rounded-md px-2.5 py-1.5 text-[0.68rem] font-bold"
         >
-          <Plus size={15} />
+          <Plus size={13} />
           New Job
         </button>
       </div>

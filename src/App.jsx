@@ -322,18 +322,20 @@ export default function App() {
             />
           </div>
 
-          <button
-            type="button"
-            onClick={() => setIsClientModalOpen(true)}
-            className="primary-button group flex w-full items-center justify-center gap-3 rounded-2xl px-6 py-4 text-sm font-bold sm:text-base"
-          >
-            <Plus
-              size={24}
-              strokeWidth={2.5}
-              className="transition-transform duration-300 group-hover:rotate-90"
-            />
-            Add New Client
-          </button>
+          <div className="flex justify-end">
+            <button
+              type="button"
+              onClick={() => setIsClientModalOpen(true)}
+              className="primary-button group inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-xs font-bold"
+            >
+              <Plus
+                size={15}
+                strokeWidth={2.5}
+                className="transition-transform duration-300 group-hover:rotate-90"
+              />
+              Add New Client
+            </button>
+          </div>
 
           <div className="mt-6 space-y-4">
             {clients.length === 0 ? (

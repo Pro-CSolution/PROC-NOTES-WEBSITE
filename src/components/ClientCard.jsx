@@ -16,6 +16,9 @@ export default function ClientCard({
     (total, job) => total + job.notes.length,
     0,
   );
+  const activeJobCount = client.jobs.filter(
+    (job) => job.status === "Work in Progress",
+  ).length;
 
   return (
     <article className="client-shell rounded-[2rem]">
@@ -45,6 +48,12 @@ export default function ClientCard({
               <span className="count-chip">
                 {noteCount} {noteCount === 1 ? "note" : "notes"}
               </span>
+              {activeJobCount > 0 && (
+                <span className="active-job-chip">
+                  {activeJobCount} active{" "}
+                  {activeJobCount === 1 ? "job" : "jobs"}
+                </span>
+              )}
             </div>
           </div>
 
