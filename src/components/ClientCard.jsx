@@ -7,6 +7,7 @@ export default function ClientCard({
   onAddJob,
   onDeleteJob,
   onAddNote,
+  onUpdateNote,
   onDeleteNote,
   onDeleteClient,
 }) {
@@ -64,6 +65,7 @@ export default function ClientCard({
           onAddJob={onAddJob}
           onDeleteJob={onDeleteJob}
           onAddNote={onAddNote}
+          onUpdateNote={onUpdateNote}
           onDeleteNote={onDeleteNote}
           onDeleteClient={onDeleteClient}
         />

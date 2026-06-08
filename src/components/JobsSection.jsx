@@ -8,6 +8,7 @@ export default function JobsSection({
   onAddJob,
   onDeleteJob,
   onAddNote,
+  onUpdateNote,
   onDeleteNote,
   onDeleteClient,
 }) {
@@ -48,6 +49,7 @@ export default function JobsSection({
               clientId={client.id}
               job={job}
               onAddNote={onAddNote}
+              onUpdateNote={onUpdateNote}
               onDeleteNote={onDeleteNote}
               onDeleteJob={onDeleteJob}
             />

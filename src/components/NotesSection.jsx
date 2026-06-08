@@ -7,6 +7,7 @@ export default function NotesSection({
   clientId,
   job,
   onAddNote,
+  onUpdateNote,
   onDeleteNote,
   onDeleteJob,
 }) {
@@ -45,6 +46,9 @@ export default function NotesSection({
             <NoteCard
               key={note.id}
               note={note}
+              onUpdate={(updatedNote) =>
+                onUpdateNote(clientId, job.id, note.id, updatedNote)
+              }
               onDelete={() => onDeleteNote(clientId, job.id, note.id)}
             />
           ))}

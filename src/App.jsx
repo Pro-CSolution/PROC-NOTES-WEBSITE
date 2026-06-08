@@ -240,6 +240,30 @@ export default function App() {
     );
   };
 
+  const updateNote = (clientId, jobId, noteId, updatedNote) => {
+    setClients((currentClients) =>
+      currentClients.map((client) =>
+        client.id === clientId
+          ? {
+              ...client,
+              jobs: client.jobs.map((job) =>
+                job.id === jobId
+                  ? {
+                      ...job,
+                      notes: job.notes.map((note) =>
+                        note.id === noteId
+                          ? { ...note, ...updatedNote }
+                          : note,
+                      ),
+                    }
+                  : job,
+              ),
+            }
+          : client,
+      ),
+    );
+  };
+
   const deleteClient = (clientId) => {
     setClients((currentClients) =>
       currentClients.filter((client) => client.id !== clientId),
@@ -333,6 +357,7 @@ export default function App() {
                   onAddJob={addJob}
                   onDeleteJob={deleteJob}
                   onAddNote={addNote}
+                  onUpdateNote={updateNote}
                   onDeleteNote={deleteNote}
                   onDeleteClient={deleteClient}
                 />

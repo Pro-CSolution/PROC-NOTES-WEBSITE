@@ -21,6 +21,7 @@ export default function JobCard({
   clientId,
   job,
   onAddNote,
+  onUpdateNote,
   onDeleteNote,
   onDeleteJob,
 }) {
@@ -73,6 +74,7 @@ export default function JobCard({
           clientId={clientId}
           job={job}
           onAddNote={onAddNote}
+          onUpdateNote={onUpdateNote}
           onDeleteNote={onDeleteNote}
           onDeleteJob={onDeleteJob}
         />
