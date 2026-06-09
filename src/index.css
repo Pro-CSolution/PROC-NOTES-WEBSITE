@@ -30,6 +30,39 @@ body {
     linear-gradient(145deg, #040711 0%, #08101e 48%, #050914 100%);
 }
 
+.lottie-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #030711;
+}
+
+.lottie-background-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(115vw, 76rem);
+  height: max(115vh, 48rem);
+  opacity: 0.18;
+  transform: translate(-50%, -50%);
+}
+
+.lottie-background-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(4, 15, 35, 0.34), rgba(2, 6, 16, 0.72) 70%),
+    linear-gradient(145deg, rgba(2, 6, 16, 0.72), rgba(5, 12, 27, 0.8));
+}
+
+.app-content-layer {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+}
+
 ::-webkit-scrollbar {
   width: 14px;
 }
