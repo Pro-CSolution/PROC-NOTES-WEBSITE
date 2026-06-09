@@ -306,6 +306,23 @@ button {
   font-weight: 700;
 }
 
+.status-select {
+  border: 1px solid rgba(103, 232, 249, 0.22);
+  background: rgba(4, 12, 26, 0.78);
+  color: #cffafe;
+  cursor: pointer;
+  transition:
+    border-color 200ms ease,
+    background-color 200ms ease;
+}
+
+.status-select:hover,
+.status-select:focus-visible {
+  border-color: rgba(103, 232, 249, 0.5);
+  background: rgba(14, 116, 144, 0.18);
+  outline: none;
+}
+
 .note-card {
   border-color: rgba(103, 232, 249, 0.1);
   background: linear-gradient(

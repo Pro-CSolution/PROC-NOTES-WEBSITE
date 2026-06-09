@@ -8,12 +8,12 @@ const STATUS_STYLES = {
     badge: "border-sky-300/20 bg-sky-300/10 text-sky-200",
   },
   "Work in Progress": {
-    dot: "bg-emerald-300 shadow-[0_0_16px_rgba(110,231,183,0.8)]",
-    badge: "border-emerald-300/20 bg-emerald-300/10 text-emerald-200",
+    dot: "bg-cyan-300 shadow-[0_0_16px_rgba(103,232,249,0.8)]",
+    badge: "border-cyan-300/20 bg-cyan-300/10 text-cyan-200",
   },
-  "No Work": {
-    dot: "bg-orange-400 shadow-[0_0_16px_rgba(251,146,60,0.7)]",
-    badge: "border-orange-300/20 bg-orange-400/10 text-orange-200",
+  Done: {
+    dot: "bg-emerald-300 shadow-[0_0_16px_rgba(110,231,183,0.65)]",
+    badge: "border-emerald-300/20 bg-emerald-300/10 text-emerald-200",
   },
 };
 
@@ -22,6 +22,7 @@ export default function JobCard({
   job,
   onAddNote,
   onUpdateNote,
+  onUpdateJobStatus,
   onDeleteNote,
   onDeleteJob,
 }) {
@@ -75,6 +76,7 @@ export default function JobCard({
           job={job}
           onAddNote={onAddNote}
           onUpdateNote={onUpdateNote}
+          onUpdateJobStatus={onUpdateJobStatus}
           onDeleteNote={onDeleteNote}
           onDeleteJob={onDeleteJob}
         />

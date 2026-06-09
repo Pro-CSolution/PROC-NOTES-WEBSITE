@@ -5,6 +5,7 @@ import JobsSection from "./JobsSection";
 export default function ClientCard({
   client,
   onAddJob,
+  onUpdateJobStatus,
   onDeleteJob,
   onAddNote,
   onUpdateNote,
@@ -72,6 +73,7 @@ export default function ClientCard({
         <JobsSection
           client={client}
           onAddJob={onAddJob}
+          onUpdateJobStatus={onUpdateJobStatus}
           onDeleteJob={onDeleteJob}
           onAddNote={onAddNote}
           onUpdateNote={onUpdateNote}

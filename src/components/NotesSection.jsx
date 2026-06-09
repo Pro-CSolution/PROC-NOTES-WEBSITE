@@ -8,6 +8,7 @@ export default function NotesSection({
   job,
   onAddNote,
   onUpdateNote,
+  onUpdateJobStatus,
   onDeleteNote,
   onDeleteJob,
 }) {
@@ -23,14 +24,33 @@ export default function NotesSection({
             {job.notes.length} {job.notes.length === 1 ? "saved note" : "saved notes"}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => setIsNoteModalOpen(true)}
-          className="secondary-button flex items-center gap-1 rounded-md px-2.5 py-1.5 text-[0.68rem] font-bold"
-        >
-          <Plus size={13} />
-          New Note
-        </button>
+        <div className="flex flex-wrap items-end gap-2">
+          <label className="block">
+            <span className="mb-1 block text-[0.58rem] font-black uppercase tracking-wider text-slate-500">
+              Job status
+            </span>
+            <select
+              value={job.status}
+              onChange={(event) =>
+                onUpdateJobStatus(clientId, job.id, event.target.value)
+              }
+              aria-label={`Change status for ${job.project}`}
+              className="status-select rounded-md px-2.5 py-1.5 text-[0.68rem] font-bold"
+            >
+              <option>Standby</option>
+              <option>Work in Progress</option>
+              <option>Done</option>
+            </select>
+          </label>
+          <button
+            type="button"
+            onClick={() => setIsNoteModalOpen(true)}
+            className="secondary-button flex items-center gap-1 rounded-md px-2.5 py-1.5 text-[0.68rem] font-bold"
+          >
+            <Plus size={13} />
+            New Note
+          </button>
+        </div>
       </div>
 
       {job.notes.length === 0 ? (

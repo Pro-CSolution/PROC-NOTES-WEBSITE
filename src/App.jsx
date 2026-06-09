@@ -16,6 +16,8 @@ function normalizeClients(clients) {
         ...client,
         jobs: client.jobs.map((job) => ({
           ...job,
+          status:
+            job.status === "No Work" ? "Done" : job.status || "Standby",
           notes: Array.isArray(job.notes) ? job.notes : [],
         })),
       };
@@ -36,7 +38,10 @@ function normalizeClients(clients) {
               id: crypto.randomUUID(),
               project: client.project || "Original Project",
               jobsite: client.jobsite || "Location not specified",
-              status: client.status || "Standby",
+              status:
+                client.status === "No Work"
+                  ? "Done"
+                  : client.status || "Standby",
               notes: Array.isArray(client.notes) ? client.notes : [],
             },
           ]
@@ -191,6 +196,21 @@ export default function App() {
           ? {
               ...client,
               jobs: client.jobs.filter((job) => job.id !== jobId),
+            }
+          : client,
+      ),
+    );
+  };
+
+  const updateJobStatus = (clientId, jobId, status) => {
+    setClients((currentClients) =>
+      currentClients.map((client) =>
+        client.id === clientId
+          ? {
+              ...client,
+              jobs: client.jobs.map((job) =>
+                job.id === jobId ? { ...job, status } : job,
+              ),
             }
           : client,
       ),
@@ -357,6 +377,7 @@ export default function App() {
                   key={client.id}
                   client={client}
                   onAddJob={addJob}
+                  onUpdateJobStatus={updateJobStatus}
                   onDeleteJob={deleteJob}
                   onAddNote={addNote}
                   onUpdateNote={updateNote}

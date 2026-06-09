@@ -77,7 +77,7 @@ export default function AddJobModal({ isOpen, onClose, onSave, clientName }) {
           >
             <option>Standby</option>
             <option>Work in Progress</option>
-            <option>No Work</option>
+            <option>Done</option>
           </select>
         </label>
 
