@@ -14,6 +14,12 @@ export default function NotesSection({
 }) {
   const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false);
+  const statusClass =
+    job.status === "Work in Progress"
+      ? "status-select--active"
+      : job.status === "Done"
+        ? "status-select--done"
+        : "status-select--standby";
 
   return (
     <div className="job-notes-panel px-4 pb-4 pt-2 sm:px-5 sm:pb-5">
@@ -35,7 +41,7 @@ export default function NotesSection({
                 onUpdateJobStatus(clientId, job.id, event.target.value)
               }
               aria-label={`Change status for ${job.project}`}
-              className="status-select rounded-md px-2.5 py-1.5 text-[0.68rem] font-bold"
+              className={`status-select ${statusClass} rounded-md px-2.5 py-1.5 text-[0.68rem] font-bold`}
             >
               <option>Standby</option>
               <option>Work in Progress</option>

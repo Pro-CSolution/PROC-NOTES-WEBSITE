@@ -4,16 +4,20 @@ import NotesSection from "./NotesSection";
 
 const STATUS_STYLES = {
   Standby: {
-    dot: "bg-sky-300 shadow-[0_0_14px_rgba(125,211,252,0.65)]",
-    badge: "border-sky-300/20 bg-sky-300/10 text-sky-200",
+    dot: "bg-slate-400 shadow-[0_0_12px_rgba(148,163,184,0.55)]",
+    badge: "border-slate-300/30 bg-slate-300/10 text-slate-200",
+    card: "job-card--standby",
   },
   "Work in Progress": {
     dot: "bg-cyan-300 shadow-[0_0_16px_rgba(103,232,249,0.8)]",
-    badge: "border-cyan-300/20 bg-cyan-300/10 text-cyan-200",
+    badge:
+      "border-cyan-300/45 bg-cyan-300/15 text-cyan-100 shadow-[0_0_18px_rgba(34,211,238,0.12)]",
+    card: "job-card--active",
   },
   Done: {
-    dot: "bg-emerald-300 shadow-[0_0_16px_rgba(110,231,183,0.65)]",
-    badge: "border-emerald-300/20 bg-emerald-300/10 text-emerald-200",
+    dot: "bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.65)]",
+    badge: "border-emerald-300/40 bg-emerald-400/15 text-emerald-100",
+    card: "job-card--done",
   },
 };
 
@@ -30,7 +34,9 @@ export default function JobCard({
   const styles = STATUS_STYLES[job.status] ?? STATUS_STYLES.Standby;
 
   return (
-    <article className="job-card overflow-hidden rounded-2xl">
+    <article
+      className={`job-card ${styles.card} overflow-hidden rounded-2xl`}
+    >
       <button
         type="button"
         aria-expanded={isExpanded}
